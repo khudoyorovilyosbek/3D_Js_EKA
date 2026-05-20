@@ -5,7 +5,7 @@ var myWorld = document.getElementById("world");
 var lock;
 
 var lvl_one_map = [
-    { name: "floor", height: 2000, width: 2000, posX: 0, posY: 100, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "violet", opacity: 0.5},
+    { name: "floor", height: 2000, width: 2000, posX: 0, posY: 100, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "violet", opacity: 1, pattern: "url('assets/textures/grass.jpg')"},
     { name: "ceiling", height: 2000, width: 2000, posX: 0, posY: -100, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "green", opacity: 0.5 },
     { name: "right wall", height: 200, width: 2000, posX: 1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "blue", opacity: 0.5 },
     { name: "left wall", height: 200, width: 2000, posX: -1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "orange", opacity: 0.5 },
@@ -21,7 +21,11 @@ function createWorld(map) {
         mySquare.style.position = "absolute";
         mySquare.style.height = `${map[i].height}px`;
         mySquare.style.width = `${map[i].width}px`;
-        mySquare.style.backgroundColor = map[i].color;
+        if (map[i].pattern) {
+            mySquare.style.backgroundImage = map[i].pattern;
+        } else {
+            mySquare.style.backgroundColor = map[i].color;
+        }
         mySquare.style.opacity = map[i].opacity;
         mySquare.style.transform = `
             translate3d(
